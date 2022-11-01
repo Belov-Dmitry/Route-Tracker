@@ -1,0 +1,24 @@
+PODS:
+  - Alamofire (5.6.2)
+  - GoogleMaps (7.1.0):
+    - GoogleMaps/Maps (= 7.1.0)
+  - GoogleMaps/Base (7.1.0)
+  - GoogleMaps/Maps (7.1.0):
+    - GoogleMaps/Base
+
+DEPENDENCIES:
+  - Alamofire
+  - GoogleMaps
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - GoogleMaps
+
+SPEC CHECKSUMS:
+  Alamofire: d368e1ff8a298e6dde360e35a3e68e6c610e7204
+  GoogleMaps: bc56ffb0324e345a2d91bac1a64a920f9c8f1b20
+
+PODFILE CHECKSUM: a24d2201129b10f7d48092cca448bc2f7a5aa277
+
+COCOAPODS: 1.11.3
