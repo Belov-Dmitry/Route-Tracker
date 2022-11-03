@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -20,37 +21,57 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C4h-0n-ZIW">
-                                <rect key="frame" x="275" y="791" width="99" height="31"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vO4-Dh-9PV">
+                                <rect key="frame" x="215.5" y="731" width="158.5" height="31"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31" id="kFC-NN-iRk"/>
+                                </constraints>
+                                <color key="tintColor" red="0.0027383953650000001" green="0.1811079545" blue="0.036275073540000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Add Marker">
-                                    <color key="baseForegroundColor" red="0.9591027661" green="0.61385918579999998" blue="0.63010543699999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Маркер на Арене">
+                                    <imageReference key="image" image="mappin" catalog="system" symbolScale="large" renderingMode="template"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="AddMarkerDidTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Qck-dz-fmd"/>
+                                    <action selector="addMarkerDidTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7BZ-Pv-k27"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C4h-0n-ZIW">
+                                <rect key="frame" x="238" y="791" width="136" height="31"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="paperplane.fill" catalog="system" title="Отслеживать">
+                                    <color key="baseForegroundColor" systemColor="systemPinkColor"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="updateLocation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1hc-D4-wCh"/>
                                 </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vO4-Dh-9PV" secondAttribute="trailing" constant="40" id="HUM-LL-x8m"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Kfd-Cg-mbg" secondAttribute="trailing" id="IGW-OE-Rrp"/>
                             <constraint firstItem="Kfd-Cg-mbg" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Mfq-FY-O04"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="C4h-0n-ZIW" secondAttribute="trailing" constant="40" id="MpZ-BG-dkC"/>
+                            <constraint firstItem="C4h-0n-ZIW" firstAttribute="top" secondItem="vO4-Dh-9PV" secondAttribute="bottom" constant="29" id="QPq-wH-2Dg"/>
                             <constraint firstItem="Kfd-Cg-mbg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="c72-7S-DIk"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Kfd-Cg-mbg" secondAttribute="bottom" id="gJw-Eh-XJM"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="vO4-Dh-9PV" secondAttribute="bottom" constant="100" id="itN-Fs-tvM"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="C4h-0n-ZIW" secondAttribute="bottom" constant="40" id="wj7-90-ETc"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vO4-Dh-9PV" secondAttribute="trailing" constant="40" id="wlL-IM-ZYG"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Я карта" id="v41-12-dYb">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="Hko-zQ-xWk">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="Iff-G1-C5z">
-                                <rect key="frame" x="302" y="5" width="92" height="34.5"/>
+                                <rect key="frame" x="300.5" y="5" width="93.5" height="34.5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="К Арене"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Текущее"/>
                                 <connections>
-                                    <action selector="goToArena:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hvx-Q3-YfD"/>
+                                    <action selector="currentLocation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eeW-v9-eTS"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -83,8 +104,13 @@
         </scene>
     </scenes>
     <resources>
+        <image name="mappin" catalog="system" width="105" height="128"/>
+        <image name="paperplane.fill" catalog="system" width="128" height="118"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
