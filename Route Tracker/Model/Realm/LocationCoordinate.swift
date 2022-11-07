@@ -22,7 +22,6 @@ class LocationRealm: Object, Decodable {
                 location.latitude = coordinate.latitude
                 location.longitude = coordinate.longitude
                 realm.add(location)
-                print(realm.configuration.fileURL)
             }
             try realm.commitWrite()
         } catch {
@@ -53,6 +52,7 @@ class LocationRealm: Object, Decodable {
             realm.beginWrite()
             realm.delete(locations)
             try realm.commitWrite()
+            
         } catch {
             print(error)
         }

@@ -87,7 +87,8 @@ class MapViewController: UIViewController {
         
     //MARK: кнопка "Новый трек"
     @IBAction func startNewTrack(_ sender: Any) {
-        isUpdatedLocation.toggle()
+        isUpdatedLocation = true
+        allLocations = []
         locationManager?.requestLocation() //спрашивает у юзера можно ли использовть его маршрут
         route?.map = nil//очистили старый route
         route = GMSPolyline() //линия
@@ -100,9 +101,9 @@ class MapViewController: UIViewController {
     //MARK: кнопка "Закончить трек"
     @IBAction func stopTracking(_ sender: Any) {
         locationManager?.stopUpdatingLocation()
-        locationRealm.deleteAllLocations()
-        locationRealm.addCoordinate(allLocations)
-    
+        self.locationRealm.deleteAllLocations()
+        self.locationRealm.addCoordinate(allLocations)
+        isUpdatedLocation = false
         print("Я остановился!")
         print(allLocations.count)
         print(allLocations)
@@ -120,17 +121,13 @@ class MapViewController: UIViewController {
                 self.locationRealm.addCoordinate(self.allLocations)
                 self.createPathFromLocations()
             }))
-          present(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil)
         }
         else {
             createPathFromLocations()
         }
-//            locationManager?.requestLocation()
-//        print("Показываю координаты!")
     }
     
-    
-
     func createPathFromLocations() {
         route?.map = nil//очистили старый route
         route = GMSPolyline() //линия
@@ -146,8 +143,6 @@ class MapViewController: UIViewController {
         }
     }
 }
-
-
 
 //MARK: делегат - отрабатывает нажитие по карте и добавлять новые и новые маркеры
 extension MapViewController: GMSMapViewDelegate {
