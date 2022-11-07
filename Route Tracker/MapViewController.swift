@@ -8,6 +8,7 @@
 import UIKit
 import GoogleMaps
 import CoreLocation
+import RealmSwift
 
 class MapViewController: UIViewController {
 
@@ -21,6 +22,11 @@ class MapViewController: UIViewController {
     var locationManager: CLLocationManager?
     var route: GMSPolyline? //маршрут движения - линия
     var routePath:GMSMutablePath?// точка
+    var allLocations:[CLLocationCoordinate2D] = []
+    var locationRealm = LocationRealm()
+    
+    var isUpdatedLocation = false
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,9 +43,11 @@ class MapViewController: UIViewController {
 //MARK: метод - Показ синей точки - маршрут
     private func configureLocationManager() {
         locationManager = CLLocationManager()
-        locationManager?.requestWhenInUseAuthorization()//отслеживаение разрешения у юзера
         locationManager?.delegate = self
-//        locationManager?.allowsBackgroundLocationUpdates = true//отслеживать координаты не включая телефон
+        locationManager?.allowsBackgroundLocationUpdates = true//отслеживать координаты не включая телефон
+        locationManager?.startMonitoringSignificantLocationChanges()//отслеживает каждые 100метров
+        locationManager?.pausesLocationUpdatesAutomatically = false //если объект стоит, то данные не отправляются, а если движется - данный идут
+        locationManager?.requestWhenInUseAuthorization()//отслеживаение разрешения у юзера
     }
 //MARK: методы - Ставим маркер и убираем маркер
     private func addMarker() {
@@ -49,10 +57,12 @@ class MapViewController: UIViewController {
 //        let view = UIView(frame: rect)
 //        view.backgroundColor = .magenta
         
-//        marker?.icon = UIImage(named: "фламинго")
+       marker?.icon = UIImage(named: "фламинго")
 //        marker?.icon = UIImage(systemName: "mappin")
 //        marker?.icon = GMSMarker.markerImage(with: .magenta)
-        
+//        let degrees = 90.0
+//        marker?.rotation = degrees
+        marker?.opacity = 0.5
         marker?.title = "Привет, пошли играть!"
         marker?.snippet = "Ростов-Арена"
         marker?.groundAnchor = CGPoint(x: 0.5, y: 0.5) //groundAnchor-земляной якорь
@@ -63,25 +73,9 @@ class MapViewController: UIViewController {
         marker?.map = nil //удалить объект с карты
         marker = nil //удалить сам объект
     }
-//MARK: кнопка "Отследить" - отрисовывается маршрут
-    @IBAction func updateLocation(_ sender: Any) {
-        locationManager?.requestLocation() //спрашивает у юзера можно ли использовть его маршрут
-        route?.map = nil//очистили старый route
-        route = GMSPolyline() //линия
-        routePath = GMSMutablePath()//проинициализировать routePath
-        route?.map = mapView //добавить на карту
-        
-        locationManager?.startUpdatingLocation()//вызов функции didUpdateLocations из делегата
-        print("Я слежу за тобой")
-    }
-//MARK: кнопка "Текущее" положение
-    @IBAction func currentLocation(_ sender: Any) {
-        locationManager?.stopUpdatingLocation()
-        locationManager?.requestLocation()
-        print("Зафиксировал?! Молодец!")
-    }
-//MARK: кнопка "Маркер на Арене"
-    @IBAction func addMarkerDidTap(_ sender: Any) {
+
+    //MARK: кнопка "К Арене"
+    @IBAction func goToArena(_ sender: UIButton) {
         if marker == nil {
             mapView.animate(toLocation: coordinate)
             addMarker()
@@ -90,10 +84,73 @@ class MapViewController: UIViewController {
             removeMarker()
         }
     }
+        
+    //MARK: кнопка "Новый трек"
+    @IBAction func startNewTrack(_ sender: Any) {
+        isUpdatedLocation.toggle()
+        locationManager?.requestLocation() //спрашивает у юзера можно ли использовть его маршрут
+        route?.map = nil//очистили старый route
+        route = GMSPolyline() //линия
+        routePath = GMSMutablePath()//проинициализировать routePath
+        route?.map = mapView //добавить на карту
+        locationManager?.startUpdatingLocation()//вызов функции didUpdateLocations из делегата
+        print("Я слежу за тобой")
+    }
+    
+    //MARK: кнопка "Закончить трек"
+    @IBAction func stopTracking(_ sender: Any) {
+        locationManager?.stopUpdatingLocation()
+        locationRealm.deleteAllLocations()
+        locationRealm.addCoordinate(allLocations)
+    
+        print("Я остановился!")
+        print(allLocations.count)
+        print(allLocations)
+        print("end of array")
+    }
+    
+    //MARK: кнопка "Отобразить предыдущий трек"
+    @IBAction func showPreviousTrack(_ sender: Any) {
+        if isUpdatedLocation {
+            let alert = UIAlertController(title: "Сначала останови слежение!", message: "Остановить?", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "ОК", style: UIAlertAction.Style.default, handler: {action in
+                self.isUpdatedLocation = false
+                self.locationManager?.stopUpdatingLocation()
+                self.locationRealm.deleteAllLocations()
+                self.locationRealm.addCoordinate(self.allLocations)
+                self.createPathFromLocations()
+            }))
+          present(alert, animated: true, completion: nil)
+        }
+        else {
+            createPathFromLocations()
+        }
+//            locationManager?.requestLocation()
+//        print("Показываю координаты!")
+    }
+    
+    
+
+    func createPathFromLocations() {
+        route?.map = nil//очистили старый route
+        route = GMSPolyline() //линия
+        routePath = GMSMutablePath()//проинициализировать routePath
+        locationRealm.getAllLocations { locations in
+            for location in locations {
+                self.routePath?.add(location)
+                self.route?.path = routePath
+                route?.map = mapView
+            }
+            let bounds = GMSCoordinateBounds(path: routePath!)
+            self.mapView.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 50))
+        }
+    }
 }
+
+
+
 //MARK: делегат - отрабатывает нажитие по карте и добавлять новые и новые маркеры
 extension MapViewController: GMSMapViewDelegate {
-
     func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
         print(coordinate)
         let manualMarker = GMSMarker(position: coordinate)
@@ -108,18 +165,20 @@ extension MapViewController: GMSMapViewDelegate {
         geocoder?.reverseGeocodeLocation(CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude), completionHandler: { places, error in print(places?.last)})
     }
 }
+
 //MARK: делегат - маршрут
 extension MapViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
-        
-        routePath?.add(location.coordinate)//добавили новую точки координат
+        allLocations.append(location.coordinate)
+        routePath?.add(location.coordinate)//добавили новую точку координат
         route?.path = routePath//отрисовка от точки А до точки Б
         
         let position = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 15)
         mapView.animate(to: position) //камера следит за синей точкой и карта плавно двигается
         
         print(location.coordinate)
+       
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
