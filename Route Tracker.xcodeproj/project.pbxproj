@@ -15,6 +15,7 @@
 		F44A633E2908649D008E393F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F44A633C2908649D008E393F /* Main.storyboard */; };
 		F44A63402908649E008E393F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F44A633F2908649E008E393F /* Assets.xcassets */; };
 		F44A63432908649E008E393F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F44A63412908649E008E393F /* LaunchScreen.storyboard */; };
+		F4B31276291827C9001D780E /* LocationCoordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B31275291827C9001D780E /* LocationCoordinate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -43,6 +44,7 @@
 		F44A633F2908649E008E393F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F44A63422908649E008E393F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F44A63442908649E008E393F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F4B31275291827C9001D780E /* LocationCoordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCoordinate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,15 +89,32 @@
 		F44A63352908649D008E393F /* Route Tracker */ = {
 			isa = PBXGroup;
 			children = (
+				F4B31278291827E3001D780E /* Model */,
+				F44A633A2908649D008E393F /* MapViewController.swift */,
 				F44A63362908649D008E393F /* AppDelegate.swift */,
 				F44A63382908649D008E393F /* SceneDelegate.swift */,
-				F44A633A2908649D008E393F /* MapViewController.swift */,
 				F44A633C2908649D008E393F /* Main.storyboard */,
 				F44A633F2908649E008E393F /* Assets.xcassets */,
 				F44A63412908649E008E393F /* LaunchScreen.storyboard */,
 				F44A63442908649E008E393F /* Info.plist */,
 			);
 			path = "Route Tracker";
+			sourceTree = "<group>";
+		};
+		F4B31277291827D0001D780E /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				F4B31275291827C9001D780E /* LocationCoordinate.swift */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
+		F4B31278291827E3001D780E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F4B31277291827D0001D780E /* Realm */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		F75AFC5F0467B707576DE9E3 /* Frameworks */ = {
@@ -240,6 +259,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4B31276291827C9001D780E /* LocationCoordinate.swift in Sources */,
 				F44A633B2908649D008E393F /* MapViewController.swift in Sources */,
 				F44A63372908649D008E393F /* AppDelegate.swift in Sources */,
 				F44A63392908649D008E393F /* SceneDelegate.swift in Sources */,
@@ -394,6 +414,7 @@
 				"EXCLUDED_ARCHS[sdk=*]" = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Route Tracker/Info.plist";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "разреши, а то работать не будет";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -424,6 +445,7 @@
 				DEVELOPMENT_TEAM = 2NHQFJT4NM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Route Tracker/Info.plist";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "разреши, а то работать не будет";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
