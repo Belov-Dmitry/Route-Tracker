@@ -5,20 +5,30 @@ PODS:
   - GoogleMaps/Base (7.1.0)
   - GoogleMaps/Maps (7.1.0):
     - GoogleMaps/Base
+  - Realm (10.32.2):
+    - Realm/Headers (= 10.32.2)
+  - Realm/Headers (10.32.2)
+  - RealmSwift (10.32.2):
+    - Realm (= 10.32.2)
 
 DEPENDENCIES:
   - Alamofire
   - GoogleMaps
+  - RealmSwift
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - GoogleMaps
+    - Realm
+    - RealmSwift
 
 SPEC CHECKSUMS:
   Alamofire: d368e1ff8a298e6dde360e35a3e68e6c610e7204
   GoogleMaps: bc56ffb0324e345a2d91bac1a64a920f9c8f1b20
+  Realm: a11d133606e898ee43ddd3c24050a382c8d3eab1
+  RealmSwift: f796f7701a5efa031554d5639ef5b2d4c850bc74
 
-PODFILE CHECKSUM: a24d2201129b10f7d48092cca448bc2f7a5aa277
+PODFILE CHECKSUM: 3e075af5b37b87535653ef5cfb756bc0fd5498f2
 
 COCOAPODS: 1.11.3
