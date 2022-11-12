@@ -128,6 +128,7 @@ class MapViewController: UIViewController {
         }
     }
     
+    
     func createPathFromLocations() {
         route?.map = nil//очистили старый route
         route = GMSPolyline() //линия
@@ -142,6 +143,17 @@ class MapViewController: UIViewController {
             self.mapView.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 50))
         }
     }
+    
+    @IBAction func logOut(_ sender: UIStoryboardSegue) {
+        print("++++++++++++++++++++++++++++++++++++++++++++")
+        print(UserDefaults.standard.bool(forKey: "isLogin"))
+        UserDefaults.standard.set(false, forKey: "isLogin")
+        print(UserDefaults.standard.bool(forKey: "isLogin"))
+        print("---------------------------------------------")
+        performSegue(withIdentifier: "toAuth", sender: sender)
+        
+    }
+    
 }
 
 //MARK: делегат - отрабатывает нажитие по карте и добавлять новые и новые маркеры
