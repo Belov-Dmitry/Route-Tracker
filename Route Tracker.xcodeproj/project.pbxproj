@@ -16,6 +16,10 @@
 		F44A63402908649E008E393F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F44A633F2908649E008E393F /* Assets.xcassets */; };
 		F44A63432908649E008E393F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F44A63412908649E008E393F /* LaunchScreen.storyboard */; };
 		F4B31276291827C9001D780E /* LocationCoordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B31275291827C9001D780E /* LocationCoordinate.swift */; };
+		F4C70BE5291C1BEF00490CB8 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4C70BE4291C1BEF00490CB8 /* Auth.storyboard */; };
+		F4C70BE9291C203600490CB8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C70BE8291C203600490CB8 /* LoginViewController.swift */; };
+		F4C70BEB291D5D2B00490CB8 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C70BEA291D5D2B00490CB8 /* RegisterViewController.swift */; };
+		F4C70BED291D8B2700490CB8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C70BEC291D8B2700490CB8 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -45,6 +49,10 @@
 		F44A63422908649E008E393F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F44A63442908649E008E393F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4B31275291827C9001D780E /* LocationCoordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCoordinate.swift; sourceTree = "<group>"; };
+		F4C70BE4291C1BEF00490CB8 /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
+		F4C70BE8291C203600490CB8 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		F4C70BEA291D5D2B00490CB8 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		F4C70BEC291D8B2700490CB8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,14 +97,12 @@
 		F44A63352908649D008E393F /* Route Tracker */ = {
 			isa = PBXGroup;
 			children = (
+				F4C70BE3291C1BA800490CB8 /* Auth */,
+				F4C70BE2291C1B0D00490CB8 /* App */,
 				F4B31278291827E3001D780E /* Model */,
 				F44A633A2908649D008E393F /* MapViewController.swift */,
-				F44A63362908649D008E393F /* AppDelegate.swift */,
-				F44A63382908649D008E393F /* SceneDelegate.swift */,
 				F44A633C2908649D008E393F /* Main.storyboard */,
-				F44A633F2908649E008E393F /* Assets.xcassets */,
 				F44A63412908649E008E393F /* LaunchScreen.storyboard */,
-				F44A63442908649E008E393F /* Info.plist */,
 			);
 			path = "Route Tracker";
 			sourceTree = "<group>";
@@ -105,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				F4B31275291827C9001D780E /* LocationCoordinate.swift */,
+				F4C70BEC291D8B2700490CB8 /* User.swift */,
 			);
 			path = Realm;
 			sourceTree = "<group>";
@@ -115,6 +122,27 @@
 				F4B31277291827D0001D780E /* Realm */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		F4C70BE2291C1B0D00490CB8 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				F44A63442908649E008E393F /* Info.plist */,
+				F44A633F2908649E008E393F /* Assets.xcassets */,
+				F44A63362908649D008E393F /* AppDelegate.swift */,
+				F44A63382908649D008E393F /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		F4C70BE3291C1BA800490CB8 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				F4C70BE4291C1BEF00490CB8 /* Auth.storyboard */,
+				F4C70BE8291C203600490CB8 /* LoginViewController.swift */,
+				F4C70BEA291D5D2B00490CB8 /* RegisterViewController.swift */,
+			);
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		F75AFC5F0467B707576DE9E3 /* Frameworks */ = {
@@ -187,6 +215,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4C70BE5291C1BEF00490CB8 /* Auth.storyboard in Resources */,
 				F44A63432908649E008E393F /* LaunchScreen.storyboard in Resources */,
 				F44A63402908649E008E393F /* Assets.xcassets in Resources */,
 				F44A633E2908649D008E393F /* Main.storyboard in Resources */,
@@ -260,8 +289,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4B31276291827C9001D780E /* LocationCoordinate.swift in Sources */,
+				F4C70BED291D8B2700490CB8 /* User.swift in Sources */,
 				F44A633B2908649D008E393F /* MapViewController.swift in Sources */,
 				F44A63372908649D008E393F /* AppDelegate.swift in Sources */,
+				F4C70BEB291D5D2B00490CB8 /* RegisterViewController.swift in Sources */,
+				F4C70BE9291C203600490CB8 /* LoginViewController.swift in Sources */,
 				F44A63392908649D008E393F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -413,11 +445,12 @@
 				DEVELOPMENT_TEAM = 2NHQFJT4NM;
 				"EXCLUDED_ARCHS[sdk=*]" = "";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Route Tracker/Info.plist";
+				INFOPLIST_FILE = "Route Tracker/App/Info.plist";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "разреши, а то работать не будет";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "lДайте доступ!";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = Auth;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -444,11 +477,12 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2NHQFJT4NM;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Route Tracker/Info.plist";
+				INFOPLIST_FILE = "Route Tracker/App/Info.plist";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "разреши, а то работать не будет";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "lДайте доступ!";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = Auth;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
