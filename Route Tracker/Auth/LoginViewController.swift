@@ -7,6 +7,8 @@
 
 import UIKit
 import RealmSwift
+import RxSwift
+import RxCocoa
 
 class LoginViewController: UIViewController {
 
@@ -32,6 +34,7 @@ class LoginViewController: UIViewController {
         loginButton.layer.masksToBounds = true
         registerButton.layer.cornerRadius = registerButton.frame.height / 2
         registerButton.layer.masksToBounds = true
+        configureLoginBindings()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -41,6 +44,18 @@ class LoginViewController: UIViewController {
         }
     }
     
+    func configureLoginBindings() {
+        Observable
+            .combineLatest(
+                loginView.rx.text,
+                passwordView.rx.text)
+            .map { login, password in
+                 return !(login ?? "").isEmpty && (password ?? "").count >= 6
+            }
+                .bind {[weak loginButton] inputFilled in
+                    loginButton?.isEnabled = inputFilled
+                }
+    }
 
     @IBAction func login(_ sender: Any) {
         guard
@@ -97,8 +112,5 @@ class LoginViewController: UIViewController {
     
     
 
-//    @IBAction func logOut(_ sender: UIStoryboardSegue) {
-//        UserDefaults.standard.set(false, forKey: "isLogin")
-//        print("---------------------------------------------")
-//    }
+
 }
