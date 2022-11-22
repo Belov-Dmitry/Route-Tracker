@@ -9,6 +9,9 @@ import UIKit
 import GoogleMaps
 import CoreLocation
 import RealmSwift
+import RxSwift
+import RxCocoa
+import RxRelay
 
 class MapViewController: UIViewController {
 
@@ -24,10 +27,8 @@ class MapViewController: UIViewController {
     var routePath:GMSMutablePath?// точка
     var allLocations:[CLLocationCoordinate2D] = []
     var locationRealm = LocationRealm()
-    
     var isUpdatedLocation = false
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         configureMap()
@@ -42,26 +43,17 @@ class MapViewController: UIViewController {
     }
 //MARK: метод - Показ синей точки - маршрут
     private func configureLocationManager() {
-        locationManager = CLLocationManager()
-        locationManager?.delegate = self
-        locationManager?.allowsBackgroundLocationUpdates = true//отслеживать координаты не включая телефон
-        locationManager?.startMonitoringSignificantLocationChanges()//отслеживает каждые 100метров
-        locationManager?.pausesLocationUpdatesAutomatically = false //если объект стоит, то данные не отправляются, а если движется - данный идут
-        locationManager?.requestWhenInUseAuthorization()//отслеживаение разрешения у юзера
-    }
+            locationManager = CLLocationManager()
+            locationManager?.delegate = self
+            locationManager?.allowsBackgroundLocationUpdates = true//отслеживать координаты не включая телефон
+            locationManager?.startMonitoringSignificantLocationChanges()//отслеживает каждые 100метров
+            locationManager?.pausesLocationUpdatesAutomatically = false //если объект стоит, то данные не отправляются, а если движется - данный идут
+            locationManager?.requestWhenInUseAuthorization()//отслеживаение разрешения у юзера
+        }
 //MARK: методы - Ставим маркер и убираем маркер
     private func addMarker() {
         marker = GMSMarker(position: coordinate)
-        
-//        let rect = CGRect (x: 0, y: 0, width: 20, height: 20)
-//        let view = UIView(frame: rect)
-//        view.backgroundColor = .magenta
-        
-       marker?.icon = UIImage(named: "фламинго")
-//        marker?.icon = UIImage(systemName: "mappin")
-//        marker?.icon = GMSMarker.markerImage(with: .magenta)
-//        let degrees = 90.0
-//        marker?.rotation = degrees
+        marker?.icon = UIImage(named: "фламинго")
         marker?.opacity = 0.5
         marker?.title = "Привет, пошли играть!"
         marker?.snippet = "Ростов-Арена"
@@ -87,16 +79,16 @@ class MapViewController: UIViewController {
         
     //MARK: кнопка "Новый трек"
     @IBAction func startNewTrack(_ sender: Any) {
-        isUpdatedLocation = true
-        allLocations = []
-        locationManager?.requestLocation() //спрашивает у юзера можно ли использовть его маршрут
-        route?.map = nil//очистили старый route
-        route = GMSPolyline() //линия
-        routePath = GMSMutablePath()//проинициализировать routePath
-        route?.map = mapView //добавить на карту
-        locationManager?.startUpdatingLocation()//вызов функции didUpdateLocations из делегата
-        print("Я слежу за тобой")
-    }
+            isUpdatedLocation = true
+            allLocations = []
+            locationManager?.requestLocation() //спрашивает у юзера можно ли использовть его маршрут
+            route?.map = nil//очистили старый route
+            route = GMSPolyline() //линия
+            routePath = GMSMutablePath()//проинициализировать routePath
+            route?.map = mapView //добавить на карту
+            locationManager?.startUpdatingLocation()//вызов функции didUpdateLocations из делегата
+            print("Я слежу за тобой")
+        }
     
     //MARK: кнопка "Закончить трек"
     @IBAction func stopTracking(_ sender: Any) {
@@ -180,12 +172,12 @@ extension MapViewController: CLLocationManagerDelegate {
         allLocations.append(location.coordinate)
         routePath?.add(location.coordinate)//добавили новую точку координат
         route?.path = routePath//отрисовка от точки А до точки Б
-        
+
         let position = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 15)
         mapView.animate(to: position) //камера следит за синей точкой и карта плавно двигается
-        
+
         print(location.coordinate)
-       
+
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
